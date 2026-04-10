@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>115年度 德天宮媽祖遶境報名表</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap');
+
+    :root {
+      --red:    #b91c1c;
+      --gold:   #b45309;
+      --lightgold: #fef3c7;
+      --cream:  #fffbeb;
+    }
+
+    body {
+      font-family: 'Noto Serif TC', 'Noto Sans TC', serif;
+      background-color: var(--cream);
+    }
+
+    /* ── 裝飾邊框 ── */
+    .temple-border {
+      border: 3px solid #b91c1c;
+      box-shadow: 0 0 0 6px #fde68a, 0 0 0 9px #b91c1c;
+    }
+
+    /* ── 區段標題橫線 ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #b91c1c);
+    }
+    .section-divider::after {
+      background: linear-gradient(to left, transparent, #b91c1c);
+    }
+
+    /* ── 輸入框 focus ── */
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #b91c1c !important;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+    }
+
+    /* ── 按鈕 ── */
+    .btn-submit {
+      background: linear-gradient(135deg, #b91c1c, #991b1b);
+      transition: all 0.3s;
+      letter-spacing: 0.15em;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #991b1b, #7f1d1d);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(185, 28, 28, 0.4);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* ── 成功畫面 ── */
+    #success-screen {
+      display: none;
+    }
+
+    /* ── 警告標示 ── */
+    .badge-required {
+      display: inline-block;
+      background: #b91c1c;
+      color: white;
+      font-size: 0.6rem;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    /* ── 尺寸格子 ── */
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .size-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+  </style>
+</head>
+<body class="min-h-screen py-8 px-4">
+
+  <!-- ════════════════ 主容器 ════════════════ -->
+  <div class="max-w-2xl mx-auto">
+
+    <!-- ── 表頭 ── -->
+    <div class="temple-border rounded-2xl bg-white overflow-hidden mb-6">
+      <div class="bg-gradient-to-b from-red-700 to-red-900 text-white text-center py-8 px-6">
+        <p class="text-yellow-300 text-sm tracking-widest mb-1">天后巡境・平安賜福</p>
+        <h1 class="text-2xl font-bold tracking-widest leading-relaxed">
+          115年度 歲次丙午年<br/>
+          <span class="text-yellow-200">德天宮 媽祖遶境</span>
+        </h1>
+        <p class="mt-2 text-yellow-100 text-sm tracking-wider">志工與隨香報名表</p>
+        <div class="mt-4 text-yellow-200 text-xs leading-relaxed">
+          🙏 一年一度的德天宮媽祖遶境盛會，將於國曆 4/18 隆重展開<br/>
+          誠摯邀請您，一同加入遶境行列，陪伴媽祖巡庄賜福
+        </div>
+      </div>
+
+      <!-- 注意事項 -->
+      <div class="bg-amber-50 border-b border-amber-200 px-6 py-4 text-sm text-amber-800 space-y-1">
+        <p>📦 報名將發放【團體服、帽子、毛巾、紀念品及餐食】，皆依報名名單發放，請務必填寫正確資料。</p>
+        <p>⚠️ 團體服等物品為限量製作，依報名順序發放，發完為止，恕不追加。</p>
+        <p>📅 <strong>報名截止：4/12</strong>（截止後不再受理）</p>
+        <p>🕖 遶境當天請於早上 <strong>7:00</strong> 準時集合！</p>
+      </div>
+    </div>
+
+    <!-- ════════════════ 報名表單 ════════════════ -->
+    <form id="register-form" class="space-y-6" novalidate>
+
+      <!-- ── 填表人資料 ── -->
+      <div class="bg-white rounded-2xl shadow-md p-6 border border-red-100">
+        <div class="section-divider mb-5">
+          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">👤 填表人資料</h2>
+        </div>
+        <p class="text-xs text-gray-500 mb-4">請由一位代表填寫以下基本資料</p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              填表人姓名 <span class="badge-required">必填</span>
+            </label>
+            <input id="f-name" type="text" placeholder="請輸入姓名"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition" required />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              填表人電話 <span class="badge-required">必填</span>
+            </label>
+            <input id="f-phone" type="tel" placeholder="務必填妥，以利聯絡"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition" required />
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 工作志工 ── -->
+      <div class="bg-white rounded-2xl shadow-md p-6 border border-red-100">
+        <div class="section-divider mb-4">
+          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">🙌 報名 — 工作志工</h2>
+        </div>
+        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4 space-y-1">
+          <p>• 志工職務與崗位由廟方統一分配安排</p>
+          <p>• 名額有限，額滿後將改為「隨香人員」</p>
+          <p>• 報名後請勿臨時缺席，如有狀況請提前告知</p>
+          <p>• 若無法配合，請改報名「隨香人員」</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              工作志工名單（可填多位）
+            </label>
+            <textarea id="f-volunteers" rows="3"
+              placeholder="格式範例：王小明 男 15歲、林欣宜 女 25歲、陳大同 男 35歲&#10;若無工作志工請留空"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              工作志工 總人數 <span class="badge-required">必填</span>
+            </label>
+            <select id="f-volunteer-count"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition bg-white" required>
+              <option value="0">0（無工作志工）</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+              <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+              <option value="13">13</option><option value="14">14</option><option value="15">15</option>
+              <option value="16">16</option><option value="17">17</option><option value="18">18</option>
+              <option value="19">19</option><option value="20">20</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 隨香人員 ── -->
+      <div class="bg-white rounded-2xl shadow-md p-6 border border-red-100">
+        <div class="section-divider mb-4">
+          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">🏮 報名 — 隨香人員</h2>
+        </div>
+        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4">
+          <p>隨香者請跟隨隊伍，走在開基媽祖轎後方，遵守工作人員指揮，保持整齊隊形與良好形象。</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              隨香人員名單（可填多位）
+            </label>
+            <textarea id="f-pilgrims" rows="3"
+              placeholder="格式範例：王小明、林欣宜、陳大同&#10;若無隨香人員請留空"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              隨香人員 總人數 <span class="badge-required">必填</span>
+            </label>
+            <select id="f-pilgrim-count"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition bg-white" required>
+              <option value="0">0（無隨香人員）</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+              <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+              <option value="13">13</option><option value="14">14</option><option value="15">15</option>
+              <option value="16">16</option><option value="17">17</option><option value="18">18</option>
+              <option value="19">19</option><option value="20">20</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">備註（選填）</label>
+            <textarea id="f-notes" rows="2"
+              placeholder="若不需要可跳過"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 團體服尺寸 ── -->
+      <div class="bg-white rounded-2xl shadow-md p-6 border border-red-100">
+        <div class="section-divider mb-4">
+          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">👕 團體服尺寸選填</h2>
+        </div>
+        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4 space-y-1">
+          <p>• 若已有「公版團體服」→ 可直接穿著，無需再領取</p>
+          <p>• 若需領取，請填寫下方尺寸件數</p>
+          <p>📦 領取時間：<strong>4/11 ～ 4/17</strong>（非填表後立即領取）</p>
+          <p>⚠️ 未依時間領取視同放棄；依報名人數發放，可少領不可多領</p>
+        </div>
+
+        <p class="text-sm text-gray-600 mb-3">⬇️ 請選填所有報名者【總共】所需衣服尺寸件數</p>
+
+        <div class="size-grid">
+          <div v-for="s in sizes" class="text-center" id="size-S">
+            <label class="block text-xs font-bold text-gray-500 mb-1">S</label>
+            <select id="f-size-s" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-500 mb-1">M</label>
+            <select id="f-size-m" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-500 mb-1">L</label>
+            <select id="f-size-l" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-500 mb-1">XL</label>
+            <select id="f-size-xl" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-500 mb-1">2XL</label>
+            <select id="f-size-2xl" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-500 mb-1">3XL</label>
+            <select id="f-size-3xl" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 送出按鈕 ── -->
+      <div class="text-center">
+        <p id="form-error" class="text-red-600 text-sm mb-3 hidden">⚠️ 請填寫所有必填欄位</p>
+        <button type="submit"
+          class="btn-submit text-white font-bold text-lg py-4 px-16 rounded-full shadow-lg">
+          確認資料完畢，提交報名 🙏
+        </button>
+        <p class="text-xs text-gray-400 mt-3">資料送出後即完成報名，媽祖保佑平安順遂</p>
+      </div>
+
+    </form>
+
+    <!-- ════════════════ 成功畫面 ════════════════ -->
+    <div id="success-screen" class="bg-white rounded-2xl shadow-md temple-border p-10 text-center">
+      <div class="text-6xl mb-4">🏮</div>
+      <h2 class="text-2xl font-bold text-red-800 mb-2 tracking-widest">報名成功！</h2>
+      <p class="text-gray-600 mb-1">感謝您的報名</p>
+      <p class="text-gray-600 mb-6">媽祖保佑，平安順遂 🙏</p>
+      <div class="bg-amber-50 rounded-xl p-4 text-sm text-amber-700 text-left space-y-1 mb-6">
+        <p>📅 遶境日期：<strong>國曆 4 月 18 日</strong></p>
+        <p>🕖 集合時間：<strong>早上 7:00</strong></p>
+        <p>📦 服裝領取：<strong>4/11 ～ 4/17</strong></p>
+      </div>
+      <button onclick="location.reload()"
+        class="text-red-700 border border-red-300 rounded-full px-8 py-2 text-sm hover:bg-red-50 transition">
+        返回表單
+      </button>
+    </div>
+
+    <!-- 頁尾 -->
+    <p class="text-center text-gray-400 text-xs mt-6">德天宮 媽祖遶境報名系統 © 115年度</p>
+  </div>
+
+  <!-- ════════════════ JavaScript ════════════════ -->
+  <script>
+    /**
+     * ╔══════════════════════════════════════════════════════════════╗
+     * ║  ⚠️  設定區：請在執行 create_google_form.gs 建立表單後      ║
+     * ║      依照下方步驟填入正確的 FORM_ID 與 entry IDs            ║
+     * ║                                                              ║
+     * ║  步驟：                                                      ║
+     * ║  1. 執行 Apps Script → 從執行紀錄取得「填寫連結」           ║
+     * ║  2. 開啟填寫連結，按 F12 → Elements → 搜尋 "entry."        ║
+     * ║     找到 <input type="hidden" name="entry.XXXXXXXX">        ║
+     * ║  3. 或：填寫後按送出，從網址列複製 formResponse 網址        ║
+     * ║  4. 將下方 FORM_ACTION_URL 與各 entry ID 填入正確值         ║
+     * ╚══════════════════════════════════════════════════════════════╝
+     */
+
+    // ── 1. Google Form 的 formResponse 網址 ──────────────────────
+    //    格式：https://docs.google.com/forms/d/e/【YOUR_FORM_ID】/formResponse
+    const FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe6Tn29KC0z4m5rg6v4RgSSZJxZkc4FPtaSYBHVhWPwKX73L/formResponse';
+
+    // ── 2. 各欄位對應的 entry ID（從 Google Form 的原始碼取得） ──
+    const ENTRY = {
+      name:           'entry.240911419',   // 填表人姓名
+      phone:          'entry.515701877',   // 填表人電話
+      volunteers:     'entry.932062280',   // 工作志工名單
+      volunteerCount: 'entry.907921074',   // 工作志工總人數
+      pilgrims:       'entry.99168604',   // 隨香人員名單
+      pilgrimCount:   'entry.1659310674',   // 隨香人員總人數
+      notes:          'entry.1551878565',   // 備註
+      sizeS:          'entry.98164793',   // 團體服 S
+      sizeM:          'entry.1490862148',   // 團體服 M
+      sizeL:          'entry.2051565813',   // 團體服 L
+      sizeXL:         'entry.1725629760',   // 團體服 XL
+      size2XL:        'entry.1729371708',   // 團體服 2XL
+      size3XL:        'entry.2109691378',   // 團體服 3XL
+    };
+
+    // ── 表單送出邏輯 ─────────────────────────────────────────────
+    document.getElementById('register-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name  = document.getElementById('f-name').value.trim();
+      const phone = document.getElementById('f-phone').value.trim();
+      const vcnt  = document.getElementById('f-volunteer-count').value;
+      const pcnt  = document.getElementById('f-pilgrim-count').value;
+
+      // 基本驗證
+      if (!name || !phone) {
+        document.getElementById('form-error').classList.remove('hidden');
+        document.getElementById('f-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      if (vcnt === '0' && pcnt === '0') {
+        alert('⚠️ 工作志工與隨香人員總人數不可同時為 0，請確認後再送出。');
+        return;
+      }
+
+      document.getElementById('form-error').classList.add('hidden');
+
+      // 組合 FormData
+      const fd = new FormData();
+      fd.append(ENTRY.name,           name);
+      fd.append(ENTRY.phone,          phone);
+      fd.append(ENTRY.volunteers,     document.getElementById('f-volunteers').value.trim());
+      fd.append(ENTRY.volunteerCount, vcnt);
+      fd.append(ENTRY.pilgrims,       document.getElementById('f-pilgrims').value.trim());
+      fd.append(ENTRY.pilgrimCount,   pcnt);
+      fd.append(ENTRY.notes,          document.getElementById('f-notes').value.trim());
+      fd.append(ENTRY.sizeS,          document.getElementById('f-size-s').value);
+      fd.append(ENTRY.sizeM,          document.getElementById('f-size-m').value);
+      fd.append(ENTRY.sizeL,          document.getElementById('f-size-l').value);
+      fd.append(ENTRY.sizeXL,         document.getElementById('f-size-xl').value);
+      fd.append(ENTRY.size2XL,        document.getElementById('f-size-2xl').value);
+      fd.append(ENTRY.size3XL,        document.getElementById('f-size-3xl').value);
+
+      try {
+        // Google Form 不支援 CORS，使用 no-cors 發送（無法取得回應狀態，但資料會送達）
+        await fetch(FORM_ACTION_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: fd
+        });
+      } catch (_) {
+        // no-cors 模式下 fetch 本身不會 throw，此處保留 catch 以防萬一
+      }
+
+      // 顯示成功畫面
+      document.getElementById('register-form').closest('form').style.display = 'none';
+      document.querySelectorAll('.bg-white.rounded-2xl').forEach(el => {
+        if (!el.id) el.style.display = 'none';
+      });
+      document.getElementById('success-screen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
