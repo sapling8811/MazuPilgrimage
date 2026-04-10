@@ -8,25 +8,16 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap');
 
-    :root {
-      --red:    #b91c1c;
-      --gold:   #b45309;
-      --lightgold: #fef3c7;
-      --cream:  #fffbeb;
-    }
-
     body {
       font-family: 'Noto Serif TC', 'Noto Sans TC', serif;
-      background-color: var(--cream);
+      background-color: #fffbeb;
     }
 
-    /* ── 裝飾邊框 ── */
     .temple-border {
       border: 3px solid #b91c1c;
       box-shadow: 0 0 0 6px #fde68a, 0 0 0 9px #b91c1c;
     }
 
-    /* ── 區段標題橫線 ── */
     .section-divider {
       display: flex;
       align-items: center;
@@ -43,14 +34,12 @@
       background: linear-gradient(to left, transparent, #b91c1c);
     }
 
-    /* ── 輸入框 focus ── */
     input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: #b91c1c !important;
-      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+      box-shadow: 0 0 0 3px rgba(185,28,28,0.15);
     }
 
-    /* ── 按鈕 ── */
     .btn-submit {
       background: linear-gradient(135deg, #b91c1c, #991b1b);
       transition: all 0.3s;
@@ -59,18 +48,12 @@
     .btn-submit:hover {
       background: linear-gradient(135deg, #991b1b, #7f1d1d);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(185, 28, 28, 0.4);
+      box-shadow: 0 8px 20px rgba(185,28,28,0.4);
     }
-    .btn-submit:active {
-      transform: translateY(0);
-    }
+    .btn-submit:active { transform: translateY(0); }
 
-    /* ── 成功畫面 ── */
-    #success-screen {
-      display: none;
-    }
+    #success-screen { display: none; }
 
-    /* ── 警告標示 ── */
     .badge-required {
       display: inline-block;
       background: #b91c1c;
@@ -82,7 +65,6 @@
       vertical-align: middle;
     }
 
-    /* ── 尺寸格子 ── */
     .size-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -91,38 +73,122 @@
     @media (min-width: 640px) {
       .size-grid { grid-template-columns: repeat(6, 1fr); }
     }
+
+    .rule-item {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #fde68a;
+    }
+    .rule-item:last-child { border-bottom: none; }
   </style>
 </head>
 <body class="min-h-screen py-8 px-4">
 
-  <!-- ════════════════ 主容器 ════════════════ -->
   <div class="max-w-2xl mx-auto">
 
-    <!-- ── 表頭 ── -->
+    <!-- ══════════════════════════════════════
+         表頭：Logo + 標題
+    ══════════════════════════════════════ -->
     <div class="temple-border rounded-2xl bg-white overflow-hidden mb-6">
-      <div class="bg-gradient-to-b from-red-700 to-red-900 text-white text-center py-8 px-6">
+      <div class="bg-gradient-to-b from-red-800 to-red-950 text-white text-center py-8 px-6">
+        <!-- Logo -->
+        <img src="https://www.jotform.com/uploads/dttmazu/form_files/%E5%9C%9F%E5%9F%8E%E5%BE%B7%E5%A4%A9%E5%AE%AE%E6%96%B0logo_%E6%96%87%E5%AD%97_%E5%BE%B7%E5%A4%A9%E5%AE%AE-01.69c15edc7866a3.79470512.png"
+          alt="德天宮 Logo"
+          class="mx-auto mb-4 h-24 object-contain drop-shadow-lg" />
         <p class="text-yellow-300 text-sm tracking-widest mb-1">天后巡境・平安賜福</p>
         <h1 class="text-2xl font-bold tracking-widest leading-relaxed">
           115年度 歲次丙午年<br/>
           <span class="text-yellow-200">德天宮 媽祖遶境</span>
         </h1>
         <p class="mt-2 text-yellow-100 text-sm tracking-wider">志工與隨香報名表</p>
-        <div class="mt-4 text-yellow-200 text-xs leading-relaxed">
-          🙏 一年一度的德天宮媽祖遶境盛會，將於國曆 4/18 隆重展開<br/>
-          誠摯邀請您，一同加入遶境行列，陪伴媽祖巡庄賜福
-        </div>
       </div>
 
-      <!-- 注意事項 -->
-      <div class="bg-amber-50 border-b border-amber-200 px-6 py-4 text-sm text-amber-800 space-y-1">
-        <p>📦 報名將發放【團體服、帽子、毛巾、紀念品及餐食】，皆依報名名單發放，請務必填寫正確資料。</p>
-        <p>⚠️ 團體服等物品為限量製作，依報名順序發放，發完為止，恕不追加。</p>
-        <p>📅 <strong>報名截止：4/12</strong>（截止後不再受理）</p>
-        <p>🕖 遶境當天請於早上 <strong>7:00</strong> 準時集合！</p>
+      <!-- 活動說明 -->
+      <div class="px-6 py-5 text-sm text-gray-700 space-y-3 border-b border-amber-200 bg-amber-50">
+        <p>一年一度的德天宮媽祖遶境盛會，將於國曆 4/18 隆重展開 🙏誠摯邀請您，一同加入遶境行列，陪伴媽祖巡庄賜福。</p>
+        <p>遶境報名將發放【團體服、帽子、毛巾、紀念品及餐食】，皆依照報名名單進行發放。請務必填寫完整且正確之報名資料，以利作業與數量統計。</p>
+        <p class="font-semibold text-red-700">⚠️團體服、帽子、毛巾及紀念品為限量製作，依照報名順序發放，發完為止，恕不追加，敬請提早完成報名。</p>
+        <p>📅 報名截止日：<strong>4/12</strong>（截止後即不再受理）</p>
+        <p>國曆4月18日遶境當天，請參加人員於早上<strong>7：00</strong>準時集合！</p>
       </div>
     </div>
 
-    <!-- ════════════════ 報名表單 ════════════════ -->
+    <!-- ══════════════════════════════════════
+         報名參加注意事項
+    ══════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-6 border border-red-100">
+      <div class="bg-red-700 text-white text-center py-3 px-4 tracking-widest font-bold">
+        🏮 報名參加注意事項 🏮
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-700">
+        <p class="text-xs text-gray-400 mb-3">為維護遶境莊嚴、確保活動順利進行，敬請所有參加人員共同遵守以下事項：</p>
+        <div class="space-y-0">
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>全程禁酒</strong>遶境期間嚴禁飲酒，保持身心清明，以示對神明的敬重。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>吸菸與檳榔規範</strong>請勿於隊伍行進中吸菸；食用檳榔者，請勿隨地吐渣，共同維護環境與隊伍形象。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>垃圾不落地</strong>每台貨車都有垃圾袋可以丟，落實垃圾隨手帶走，共同維護環境整潔。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>服裝儀容整齊</strong>建議穿著整齊、方便行走之服裝與鞋子，避免穿著拖鞋。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>遵從指揮</strong>請配合工作人員引導與交通指揮。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>心存敬意，言行端正</strong>隨香過程請避免嬉鬧、口出穢言或不雅行為，共同維護神聖氛圍。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>量力而為，注意安全</strong>請評估自身體力與健康狀況，若有不適請即時休息或告知工作人員。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>禁止危險行為</strong>嚴禁推擠、奔跑或其他危險舉動，確保自身與他人安全。</span>
+          </div>
+          <div class="rule-item">
+            <span class="text-red-600 font-bold shrink-0">🔸</span>
+            <span><strong>違規說明處理</strong>如有影響遶境秩序、損害本宮形象或不服從勸導之情形，主辦單位有權請離隊伍，敬請配合。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         活動圖片
+    ══════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-6 border border-red-100">
+      <div class="bg-amber-700 text-white text-center py-2 px-4 tracking-wider text-sm font-bold">
+        📸 活動照片 &amp; 路線圖
+      </div>
+      <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <img src="https://www.jotform.com/uploads/guest_b026d31c0f88d70f/form_files/IMG_4579.69c2926f549664.03944507.jpeg"
+            alt="活動照片"
+            class="w-full rounded-xl object-cover shadow" />
+        </div>
+        <div>
+          <img src="https://www.jotform.com/uploads/dttmazu/form_files/S_28991629.69c68c06b6c134.30182391.jpg"
+            alt="路線圖"
+            class="w-full rounded-xl object-cover shadow" />
+          <p class="text-xs text-gray-400 text-center mt-1">遶境路線圖</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         報名表單
+    ══════════════════════════════════════ -->
     <form id="register-form" class="space-y-6" novalidate>
 
       <!-- ── 填表人資料 ── -->
@@ -130,21 +196,20 @@
         <div class="section-divider mb-5">
           <h2 class="text-red-800 font-bold text-base whitespace-nowrap">👤 填表人資料</h2>
         </div>
-        <p class="text-xs text-gray-500 mb-4">請由一位代表填寫以下基本資料</p>
-
+        <p class="text-xs text-gray-500 mb-4">填表人（一位）</p>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              填表人姓名 <span class="badge-required">必填</span>
+              姓名 <span class="badge-required">必填</span>
             </label>
-            <input id="f-name" type="text" placeholder="請輸入姓名"
+            <input id="f-name" type="text" placeholder="填表人"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition" required />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              填表人電話 <span class="badge-required">必填</span>
+              電話 <span class="badge-required">必填</span>
             </label>
-            <input id="f-phone" type="tel" placeholder="務必填妥，以利聯絡"
+            <input id="f-phone" type="tel" placeholder="（務必填妥，以利聯絡）"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition" required />
           </div>
         </div>
@@ -155,29 +220,36 @@
         <div class="section-divider mb-4">
           <h2 class="text-red-800 font-bold text-base whitespace-nowrap">🙌 報名 — 工作志工</h2>
         </div>
-        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4 space-y-1">
-          <p>• 志工職務與崗位由廟方統一分配安排</p>
-          <p>• 名額有限，額滿後將改為「隨香人員」</p>
-          <p>• 報名後請勿臨時缺席，如有狀況請提前告知</p>
-          <p>• 若無法配合，請改報名「隨香人員」</p>
+
+        <p class="text-sm text-gray-700 mb-3">誠摯邀請有意願服務媽祖，擔任工作志工，加入媽祖的護法行列，共同守護這場盛大的繞境活動。</p>
+
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-800 mb-4 space-y-2">
+          <p class="font-bold">⚠️ 報名遶境【工作志工】注意事項</p>
+          <p>為確保遶境活動順利進行，所有工作志工之職務與崗位，將由廟方統一分配與安排。</p>
+          <p>🔸 工作志工名額有限，額滿後將改為「隨香人員」，敬請見諒與配合。</p>
+          <p>👉 報名「工作志工」前，請先評估自身身體狀況遶境行程時間較長、活動強度較高，請確認自身可負荷。</p>
+          <p>👉 報名「工作志工」者，請勿臨時缺席請勿中途離開或臨時缺席，以免影響整體運作與人力配置。</p>
+          <p>👉 若無法配合者請勿報名「工作志工」，可改報名「隨香人員」。</p>
+          <p>🙏 如有特殊狀況，請務必提前告知以利廟方提前調整與安排。</p>
         </div>
 
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              工作志工名單（可填多位）
+              報名_工作志工 請填寫【名字、性別、歲數】在欄位（可填寫多位）
             </label>
+            <p class="text-xs text-gray-400 mb-1">例如：王小明 男 15歲、林欣宜 女 25歲、陳大同 男 35歲　⚠️《若只單純隨香人員，請於下方填入》</p>
             <textarea id="f-volunteers" rows="3"
-              placeholder="格式範例：王小明 男 15歲、林欣宜 女 25歲、陳大同 男 35歲&#10;若無工作志工請留空"
+              placeholder="請填寫工作志工名單，若無請留空"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              工作志工 總人數 <span class="badge-required">必填</span>
+              ⚠️ 報名_工作志工總人數（若沒有工作志工，選項要選擇0）<span class="badge-required">必填</span>
             </label>
             <select id="f-volunteer-count"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition bg-white" required>
-              <option value="0">0（無工作志工）</option>
+              <option value="0">0</option>
               <option value="1">1</option><option value="2">2</option><option value="3">3</option>
               <option value="4">4</option><option value="5">5</option><option value="6">6</option>
               <option value="7">7</option><option value="8">8</option><option value="9">9</option>
@@ -195,26 +267,29 @@
         <div class="section-divider mb-4">
           <h2 class="text-red-800 font-bold text-base whitespace-nowrap">🏮 報名 — 隨香人員</h2>
         </div>
-        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4">
-          <p>隨香者請跟隨隊伍，走在開基媽祖轎後方，遵守工作人員指揮，保持整齊隊形與良好形象。</p>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800 mb-4">
+          <p class="font-bold">⚠️ 報名遶境【隨香人員】注意事項</p>
+          <p class="mt-1">報名隨香者請跟隨隊伍，走在開基媽祖轎後方，遵守工作人員指揮，保持整齊隊形與良好形象，共同維護莊嚴氛圍。</p>
         </div>
 
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              隨香人員名單（可填多位）
+              報名_隨香人員 請填寫【名字】在欄位（可填寫多位）
             </label>
+            <p class="text-xs text-gray-400 mb-1">例如：王小明、林欣宜、陳大同　⚠️《此欄位為隨香人員》⚠️若無可跳過</p>
             <textarea id="f-pilgrims" rows="3"
-              placeholder="格式範例：王小明、林欣宜、陳大同&#10;若無隨香人員請留空"
+              placeholder="請填寫隨香人員名單，若無請留空"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
-              隨香人員 總人數 <span class="badge-required">必填</span>
+              報名_隨香人員總人數（若沒有隨香人員，選項要選擇0）<span class="badge-required">必填</span>
             </label>
             <select id="f-pilgrim-count"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition bg-white" required>
-              <option value="0">0（無隨香人員）</option>
+              <option value="0">0</option>
               <option value="1">1</option><option value="2">2</option><option value="3">3</option>
               <option value="4">4</option><option value="5">5</option><option value="6">6</option>
               <option value="7">7</option><option value="8">8</option><option value="9">9</option>
@@ -225,7 +300,7 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">備註（選填）</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">備註（若不需要可跳過）</label>
             <textarea id="f-notes" rows="2"
               placeholder="若不需要可跳過"
               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition resize-none"></textarea>
@@ -233,22 +308,31 @@
         </div>
       </div>
 
-      <!-- ── 團體服尺寸 ── -->
+      <!-- ── 團體服領取說明 + 尺寸 ── -->
       <div class="bg-white rounded-2xl shadow-md p-6 border border-red-100">
         <div class="section-divider mb-4">
-          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">👕 團體服尺寸選填</h2>
-        </div>
-        <div class="bg-amber-50 rounded-lg p-3 text-xs text-amber-700 mb-4 space-y-1">
-          <p>• 若已有「公版團體服」→ 可直接穿著，無需再領取</p>
-          <p>• 若需領取，請填寫下方尺寸件數</p>
-          <p>📦 領取時間：<strong>4/11 ～ 4/17</strong>（非填表後立即領取）</p>
-          <p>⚠️ 未依時間領取視同放棄；依報名人數發放，可少領不可多領</p>
+          <h2 class="text-red-800 font-bold text-base whitespace-nowrap">👕 團體服領取說明</h2>
         </div>
 
-        <p class="text-sm text-gray-600 mb-3">⬇️ 請選填所有報名者【總共】所需衣服尺寸件數</p>
+        <div class="text-sm text-gray-700 space-y-2 mb-4">
+          <p>本次遶境統一穿著「團體服」，請大家協助配合，以展現整體一致與莊嚴 🙏</p>
+          <p>🔸 若您已有「公版團體服」&lt;如下圖&gt;</p>
+          <p class="pl-4">👉 可直接穿著參加，本次無需再領取。</p>
+          <p>🔸 若您需領取團體服 👉 請於表單中填寫尺寸與數量，以利統一準備。</p>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800 mb-4 space-y-1">
+          <p>📦【領取時間】衣服、帽子、毛巾、結緣紀念品開始發放時間為「4月11日至4月17日」。⚠️ 非填寫表單後立即領取，請特別留意。</p>
+          <p>👉 未依時間領取者視同放棄</p>
+          <p>👉 團體服依「報名人數」發放（報名幾位即提供幾件，可少領，不可多領）</p>
+          <p>👉 若已經有此件團體服，就不用再領取囉</p>
+          <p>請將領取機會禮讓給其他有需要的信眾，感謝大家。</p>
+        </div>
+
+        <p class="text-sm text-center font-semibold text-gray-600 mb-3">⬇️ 請在底下選填一同報名者【總共】所需要衣服尺寸件數 ⬇️</p>
 
         <div class="size-grid">
-          <div v-for="s in sizes" class="text-center" id="size-S">
+          <div class="text-center">
             <label class="block text-xs font-bold text-gray-500 mb-1">S</label>
             <select id="f-size-s" class="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-center bg-white transition">
               <option value="0">0</option><option value="1">1</option><option value="2">2</option>
@@ -303,21 +387,26 @@
             </select>
           </div>
         </div>
+
+        <!-- 尺寸計數顯示 -->
+        <p class="text-xs text-right text-gray-400 mt-3">🔸 總共需要衣服件數：<span id="total-shirts" class="font-bold text-red-700">0</span> 件</p>
       </div>
 
       <!-- ── 送出按鈕 ── -->
-      <div class="text-center">
+      <div class="text-center pb-4">
         <p id="form-error" class="text-red-600 text-sm mb-3 hidden">⚠️ 請填寫所有必填欄位</p>
         <button type="submit"
-          class="btn-submit text-white font-bold text-lg py-4 px-16 rounded-full shadow-lg">
-          確認資料完畢，提交報名 🙏
+          class="btn-submit text-white font-bold text-lg py-4 px-12 rounded-full shadow-lg">
+          提交（資料確認完畢）🙏
         </button>
         <p class="text-xs text-gray-400 mt-3">資料送出後即完成報名，媽祖保佑平安順遂</p>
       </div>
 
     </form>
 
-    <!-- ════════════════ 成功畫面 ════════════════ -->
+    <!-- ══════════════════════════════════════
+         成功畫面
+    ══════════════════════════════════════ -->
     <div id="success-screen" class="bg-white rounded-2xl shadow-md temple-border p-10 text-center">
       <div class="text-6xl mb-4">🏮</div>
       <h2 class="text-2xl font-bold text-red-800 mb-2 tracking-widest">報名成功！</h2>
@@ -326,7 +415,7 @@
       <div class="bg-amber-50 rounded-xl p-4 text-sm text-amber-700 text-left space-y-1 mb-6">
         <p>📅 遶境日期：<strong>國曆 4 月 18 日</strong></p>
         <p>🕖 集合時間：<strong>早上 7:00</strong></p>
-        <p>📦 服裝領取：<strong>4/11 ～ 4/17</strong></p>
+        <p>📦 服裝領取：<strong>4月11日至4月17日</strong></p>
       </div>
       <button onclick="location.reload()"
         class="text-red-700 border border-red-300 rounded-full px-8 py-2 text-sm hover:bg-red-50 transition">
@@ -374,6 +463,14 @@
       size2XL:        'entry.1729371708',   // 團體服 2XL
       size3XL:        'entry.2109691378',   // 團體服 3XL
     };
+
+    // ── 尺寸件數即時統計 ─────────────────────────────────────────
+    const sizeSelects = ['f-size-s','f-size-m','f-size-l','f-size-xl','f-size-2xl','f-size-3xl'];
+    function updateTotal() {
+      const total = sizeSelects.reduce((sum, id) => sum + parseInt(document.getElementById(id).value || 0), 0);
+      document.getElementById('total-shirts').textContent = total;
+    }
+    sizeSelects.forEach(id => document.getElementById(id).addEventListener('change', updateTotal));
 
     // ── 表單送出邏輯 ─────────────────────────────────────────────
     document.getElementById('register-form').addEventListener('submit', async function (e) {
@@ -426,9 +523,10 @@
       }
 
       // 顯示成功畫面
-      document.getElementById('register-form').closest('form').style.display = 'none';
-      document.querySelectorAll('.bg-white.rounded-2xl').forEach(el => {
-        if (!el.id) el.style.display = 'none';
+      document.getElementById('register-form').style.display = 'none';
+      // 隱藏表單前的所有卡片區塊（注意事項、圖片區）
+      document.querySelectorAll('.max-w-2xl > div:not(#success-screen), .max-w-2xl > p').forEach(el => {
+        el.style.display = 'none';
       });
       document.getElementById('success-screen').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
