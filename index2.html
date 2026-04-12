@@ -13,6 +13,7 @@
 <style type="text/css">
 body {
   background-color: #f2f2f2;
+  display: none; /* 初始隱藏，讀取截止日期後決定是否顯示 */
   font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif !important;
 }
 
@@ -96,6 +97,38 @@ body {
 <script type="text/javascript">
   // 清除原本 JotForm 的複雜腳本，改用簡潔的 Google Form 邏輯
   var submitted = false;
+
+  // 動態讀取 Google 試算表中的截止日期
+  async function checkDeadline() {
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx4aIgT1kKfcO4-rNLMlllemPrWCGS-rQotsm1QwIvdR0P-s2ArosA9Q87MZ7vE2Yoy6g/exec'; // 確保網址以 /exec 結尾
+    try {
+      // GAS Web App 必須處理重定向，fetch 預設會處理
+      const response = await fetch(WEB_APP_URL, {
+        method: 'GET',
+        mode: 'cors'
+      });
+      
+      if (!response.ok) throw new Error('網路回應不正常: ' + response.status);
+      
+      const data = await response.json();
+      const deadline = new Date(data.deadline);
+
+      if (new Date() >= deadline) {
+        window.location.href = 'closed.html';
+      } else {
+        // 未截止，確認 body 存在後顯示
+        if (document.body) document.body.style.display = 'block';
+        else window.addEventListener('DOMContentLoaded', () => document.body.style.display = 'block');
+      }
+    } catch (error) {
+      console.error('無法讀取截止日期:', error);
+      // 發生錯誤時預設顯示內容，避免頁面永久全白
+      window.addEventListener('DOMContentLoaded', () => document.body.style.display = 'block');
+    }
+  }
+
+  checkDeadline();
+
   document.addEventListener('DOMContentLoaded', function() {
     const sizeInputs = ['input_10', 'input_31', 'input_32', 'input_33', 'input_34', 'input_35'];
     const totalDisplay = document.getElementById('input_43');
